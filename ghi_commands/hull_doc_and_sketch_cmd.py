@@ -4,7 +4,8 @@ import Sketcher
 
 from ghi_obj_creation.hull_creation import hull_doc_creation
 from ghi_obj_creation.hull_creation import hull_body_creation
-from ghi_obj_creation.hull_creation import hull_sketch_creation
+from ghi_obj_creation.hull_creation import hull_section_sketch_creation
+from ghi_obj_creation.hull_creation import hull_center_line_sketch_creation
 from ghi_cell_alias_utils.cam_hull_section import hull_section_value
 from ghi_cell_alias_utils.cam_hull_section import hull_section_name
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value
@@ -27,14 +28,15 @@ class DocSketchHullCmd:
         list_val = {**sec_value, **sec_value2}
         doc_name = hull_doc_creation(list_val) # da qui ci sono i varset pronti
         sec_name = hull_section_name()
-        center_line = hull_center_line_name()
+        center_line_name = hull_center_line_name()
         App.ActiveDocument=App.getDocument(doc_name)
         App.ActiveDocument.recompute()
         App.ActiveDocument=App.getDocument(doc_name)
         body_name = hull_body_creation()                
         App.ActiveDocument.recompute()
-        # App.ActiveDocument=App.getDocument(body_name)
-        hull_sketch_creation(sec_name,body_name)
+        hull_section_sketch_creation(sec_name,body_name)
+        App.ActiveDocument.recompute()
+        hull_center_line_sketch_creation(center_line_name,body_name)
         App.ActiveDocument.recompute()
 
 

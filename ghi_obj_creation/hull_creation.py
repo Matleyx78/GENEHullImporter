@@ -3,7 +3,7 @@ import FreeCADGui as Gui
 import Part
 import Sketcher
 
-from ghi_utils.cell_alias_mapping import row_sheet
+# from ghi_utils.cell_alias_mapping import row_sheet
 
 def hull_doc_creation(section_data):
     name = 'Hull'
@@ -13,10 +13,12 @@ def hull_doc_creation(section_data):
     for key1 in section_data:
         varset = App.activeDocument().addObject('App::VarSet',key1 + '_Data')
         App.activeDocument().getObject("Hull_Varset").addObject(App.activeDocument().getObject(key1 + '_Data'))
-        for key, value in section_data[key1].items():
-            varset.addProperty('App::PropertyFloat', key, 'Sections', '')
-            # assegna la proprietà dinamicamente usando setattr
-            setattr(varset, key, float(value) * 10)  # moltiplica per 10 per convertire da cm a mm
+        for key2 in section_data[key1]:
+            for key3, value in section_data[key1][key2].items():
+                App.Console.PrintMessage(f'Impostazione {key1}_{key2}_{key3} a {value}\n')
+                varset.addProperty('App::PropertyFloat', key2 + '_' + key3, 'Sections', '')
+                # assegna la proprietà dinamicamente usando setattr
+                setattr(varset, key2 + '_' + key3, float(value) * 10)  # moltiplica per 10 per convertire da cm a mm
     App.ActiveDocument=App.getDocument(name)
     Gui.ActiveDocument=Gui.getDocument(name)
     return name

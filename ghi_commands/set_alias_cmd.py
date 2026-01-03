@@ -1,8 +1,8 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 
-
-from ghi_utils.cell_alias_mapping import section_cell_mapping
+from ghi_cell_alias_utils.cam_hull_section import hull_section_cell_mapping
+from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_cell_mapping
 
 class SetAliasCmd:
 
@@ -15,12 +15,15 @@ class SetAliasCmd:
     def Activated(self):
 
         doc = App.getDocument('GH_Import_Doc')
-        sect = section_cell_mapping()
+        sect = {}
+        sect['hull'] = hull_section_cell_mapping()
+        sect['cen_line'] = hull_center_line_cell_mapping()
         # App.Console.PrintMessage(sect)
         for key1 in sect:
             for key2 in sect[key1]:
-                App.Console.PrintMessage(key1 + " " + key2 + " " + sect[key1][key2] + "\n")
-                doc.getObjectsByLabel("GH_Offset_Sheet")[0].setAlias(sect[key1][key2], key1 + "_" + key2)
+                for key3 in sect[key1][key2]:
+                    for key4 in sect[key1][key2][key3]:
+                        doc.getObjectsByLabel("GH_Offset_Sheet")[0].setAlias(sect[key1][key2][key3][key4], key2 + "_" + key3 + "_" + key4)
         doc.recompute()
 
 

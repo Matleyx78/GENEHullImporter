@@ -49,6 +49,7 @@ def hull_center_line_cell_mapping():
     for key1 in name:
         Sections[key1] = {}
         for key2 in rows:
+            Sections[key1][key2] = {}
             Sections[key1][key2]['x'] = name[key1]['x'] + str(rows[key2])
             Sections[key1][key2]['z'] = name[key1]['z'] + str(rows[key2])
     return Sections

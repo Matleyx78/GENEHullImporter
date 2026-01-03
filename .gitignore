@@ -1,0 +1,3 @@
+# Ignora file temporanei e di log
+*.pyc
+__pycache__/

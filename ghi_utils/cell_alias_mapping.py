@@ -1,4 +1,20 @@
-def section_cell_mapping():
+#   output:
+#   list['name_section']['row_name_or_number']['coord'] = cell number and row
+#
+#   example:
+#   list['C1']['l_15']['y'] = 'G15'
+#   list['C1']['l_15']['z'] = 'H15'
+#
+#   Alias:
+#       C1_l_15_y
+#       C1_l_15_z
+#   VarSet:
+#      name: C1_Data
+#        property:
+#          l_15_y: value of G15
+#          l_15_z: value of G15
+
+def XXXsection_cell_mapping():
     Sezioni = {}
     name = section_name()
     rows = row_sheet()
@@ -10,7 +26,7 @@ def section_cell_mapping():
             Sezioni[key1][key2 + '_z'] = name[key1]['z'] + str(rows[key2])
     return Sezioni
 
-def section_name():
+def XXXsection_name():                         # section name and column letter
     name ={}
     name['Car2'] = {'y' :'C', 'z' : 'D',}
     name['C0'] = {'y' :'E', 'z' : 'F',}
@@ -30,7 +46,7 @@ def section_name():
     name['Cav2'] = {'y' :'AG', 'z' : 'AH',}
     return name
 
-def row_sheet():
+def XXXrow_sheet():                         # row name and row number
     rows = {
         'sheer': 13,
         'hard': 14,
@@ -58,7 +74,7 @@ def row_sheet():
     }
     return rows
 
-def section_value(spreadsheet):
+def XXXsection_value(spreadsheet):
     sec_value = {}
     section = section_cell_mapping()
     for key1 in section:

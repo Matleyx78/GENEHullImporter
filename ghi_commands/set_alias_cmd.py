@@ -3,7 +3,6 @@ import FreeCADGui as Gui
 
 from ghi_utils.cell_alias_mapping import section_cell_mapping
 
-
 class SetAliasCmd:
 
     def GetResources(self):

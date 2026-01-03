@@ -40,53 +40,22 @@ def hull_sketch_creation(section, body_name):
 
     for key1 in section:
         varset = doc.getObject(key1 + '_Data')
-        # Leggi x e convertilo in mm (se i tuoi dati sono in cm)
-        try:
-            x_val = float(varset.getPropertyByName('x'))
-        except Exception:
-            x_val = 0.0
-        x_mm = x_val * 10.0  # usa questa regola solo se i dati sono in cm
 
-        # Crea lo sketch nel documento
         sk_name = 'Sk_' + key1
         sketch = App.ActiveDocument.addObject('Sketcher::SketchObject', sk_name)
 
-        # Aggiungi l'istanza al Body (body.addObject accetta l'oggetto, non il tipo/nome)
         try:
             body.addObject(sketch)
         except Exception:
-            # fallback: lasciare lo sketch come figlio del documento se body non supporta addObject
             pass
 
-        # Imposta una sola Placement coerente (coordinate in mm)
-        # sketch.Placement = App.Placement(App.Vector(x_mm, 0.0, 0.0), App.Rotation(App.Vector(0, 0, 0), 0))
-
-        # Non impostare contemporaneamente AttachmentSupport/Offset a meno che tu non conosca la trasformazione risultante
-        # Se vuoi agganciare al body origin, assicurati che esista e usa l'oggetto corretto:
         origin = body.getObject('Origin') or getattr(body, 'Origin', None)
         if origin:
             sketch.AttachmentSupport = (origin, ['XZ_Plane'])
             sketch.AttachmentOffset = App.Placement(App.Vector(0,0,0),App.Rotation(App.Vector(0,0,0),0))
             sketch.setExpression('.AttachmentOffset.Base.z', key1 + '_Data.x')
-
-        # Impostazioni aggiuntive se servono:
-        sketch.MapMode = 'FlatFace'  # rimuovi se non ha senso per il tuo caso
-        point_creation(sketch,body.Name,varset)
-# ...existing code...
-
-def hull_sketch_creation_OLD(section,body):
-    body = App.ActiveDocument.getObject(body)
-    for key1 in section:
-        # Crea sketch
-        sketch = body.addObject('Sketcher::SketchObject','Sk_' + key1)
-        sketch.AttachmentSupport = (body.getObject('Origin'),['YZ_Plane'])
-        sketch.Placement = App.Placement(App.Vector(float(section[key1]['x']), 0, 0 ), App.Rotation(App.Vector(0,0,0), 0))
         sketch.MapMode = 'FlatFace'
-        sketch.AttachmentOffset = App.Placement(App.Vector(float(section[key1]['x']),0,0),App.Rotation(App.Vector(0,0,0),0))
-        sketch.BaseOffset = App.Placement(App.Vector(0,0,float(section[key1]['x'])),App.Rotation(App.Vector(0,0,1),0))
-        sketch.Placement = App.Placement(App.Vector(float(section[key1]['x']), 0, 0 ), App.Rotation(App.Vector(0,0,0), 0))
-        # line_creation(sketch,body.Name,float(section[key1]['x']))
-        # FineSketch
+        point_creation(sketch,body.Name,varset)
 
 def point_creation(sketch,body,varset):    
     body = App.ActiveDocument.getObject(body)

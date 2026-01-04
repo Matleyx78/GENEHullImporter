@@ -16,6 +16,10 @@ class GENEHullImporterWorkbench(Gui.Workbench):
             "Hull Doc and Sketch",
             ["GHI_Doc_Sketch_Hull"]
         )
+        self.appendToolbar(
+            "Hull Curves",
+            ["GHI_Doc_Curves_Hull"]
+        )
         self.appendMenu(
             "Set Alias",
             ["GHI_Set_Alias"]

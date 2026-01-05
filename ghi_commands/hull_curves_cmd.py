@@ -17,6 +17,7 @@ class DocCurvesHullCmd:
 
     def Activated(self):
         import Part
+        import Curves
         doc = 'Hull'
         App.ActiveDocument=App.getDocument(doc)
         sk = App.ActiveDocument.getObject('Sk_C0')

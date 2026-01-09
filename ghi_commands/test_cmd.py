@@ -14,7 +14,6 @@ class TestCmd:
 
     def Activated(self):
 
-        topot_test()
         doc = FreeCAD.ActiveDocument
         if doc is None:
             doc = FreeCAD.newDocument("TestDocument")
@@ -28,7 +27,8 @@ class TestCmd:
         if body is None:
             body = doc.addObject("PartDesign::Body", "TestBody")
             doc.recompute()
-            topot_test(30)
+            
+        topot_test(30)
         doc.recompute()
 
 def register():

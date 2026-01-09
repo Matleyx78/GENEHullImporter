@@ -11,6 +11,8 @@ def hull_doc_creation(section_data):
     Hull = App.newDocument(name)
     App.setActiveDocument(name)       
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Varset").Label="Hull_Varset" 
+    App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Sketch").Label="Hull_Sketch" 
+    App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Curves").Label="Hull_Curves" 
     for key1 in section_data:
         varset = App.activeDocument().addObject('App::VarSet',key1 + '_Data')
         App.activeDocument().getObject("Hull_Varset").addObject(App.activeDocument().getObject(key1 + '_Data'))
@@ -57,6 +59,7 @@ def hull_section_sketch_creation(section, body_name):
             sketch.setExpression('.AttachmentOffset.Base.z', key1 + '_Data.cor_x_x')
         sketch.MapMode = 'FlatFace'
         point_creation_sketch_section(sketch,body.Name,varset)
+        App.activeDocument().getObject("Hull_Sketch").addObject(App.activeDocument().getObject(sk_name))
 
 def hull_center_line_sketch_creation(section, body_name):
     doc = App.ActiveDocument
@@ -81,6 +84,7 @@ def hull_center_line_sketch_creation(section, body_name):
             sketch.AttachmentOffset = App.Placement(App.Vector(0,0,0),App.Rotation(App.Vector(0,1,0),180))
         sketch.MapMode = 'FlatFace'
         point_creation_sketch_center_line(sketch,body.Name,varset)
+        App.activeDocument().getObject("Hull_Sketch").addObject(App.activeDocument().getObject(sk_name))
 
 def point_creation_sketch_section(sketch,body,varset):    
     body = App.ActiveDocument.getObject(body)

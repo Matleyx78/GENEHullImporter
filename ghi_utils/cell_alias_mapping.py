@@ -5,7 +5,6 @@
 #   list['C1']['l_15']['y'] = 'G15'
 #   list['C1']['l_15']['z'] = 'H15'
 #
-# nuovo uupete
 # test commit
 #   Alias:
 #       C1_l_15_y

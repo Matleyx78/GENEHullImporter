@@ -20,6 +20,10 @@ class GENEHullImporterWorkbench(Gui.Workbench):
             "Hull Curves",
             ["GHI_Doc_Curves_Hull"]
         )
+        self.appendToolbar(
+            "Topol",
+            ["Topological test"]
+        )
         self.appendMenu(
             "Set Alias",
             ["GHI_Set_Alias"]

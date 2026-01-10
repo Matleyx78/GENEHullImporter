@@ -16,7 +16,7 @@ def hull_doc_creation(section_data):
     for key1 in section_data:
         varset = App.activeDocument().addObject('App::VarSet',key1 + '_Data')
         App.activeDocument().getObject("Hull_Varset").addObject(App.activeDocument().getObject(key1 + '_Data'))
-        for key2 in section_data[key1]:
+        for key2 in section_data[key1]:                 # Example: section_data['C0']
             for key3, value in section_data[key1][key2].items():
                 App.Console.PrintMessage(f'Impostazione {key1}_{key2}_{key3} a {value}\n')
                 varset.addProperty('App::PropertyFloat', key2 + '_' + key3, 'Sections', '')

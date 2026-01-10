@@ -26,7 +26,7 @@ class DocSketchHullCmd:
         sec_value = hull_section_value(sheet)               #list['name_section']['row_name_or_number']['coord'] = value
         sec_value2 = hull_center_line_value(sheet)          #list['name_section']['row_name_or_number']['coord'] = value
         list_val = {**sec_value, **sec_value2}
-        doc_name = hull_doc_creation(list_val) # da qui ci sono i varset pronti
+        doc_name = hull_doc_creation(list_val)              # da qui ci sono i varset pronti
         sec_name = hull_section_name()
         center_line_name = hull_center_line_name()
         App.ActiveDocument=App.getDocument(doc_name)

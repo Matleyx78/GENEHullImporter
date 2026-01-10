@@ -3,7 +3,7 @@ import FreeCADGui as Gui
 
 import Sketcher
 import Part
-import Curves
+# import Curves
 from ghi_cell_alias_utils.cam_hull_section import hull_section_value
 from ghi_cell_alias_utils.cam_hull_section import hull_section_name
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value
@@ -27,38 +27,57 @@ class DocCurvesHullCmd:
         obj.Shape = curve.toShape()
 
     def Activated(self):
-        from Curves import Sketch_on_Surface
-        from Curves import Interpolate
-        # -----------------------------
-        # PUNTI ORDINATI DI UNA SEZIONE
-        # -----------------------------
-        points = [
-            App.Vector(0.0, -1.5,  0.0),
-            App.Vector(0.0, -1.2, -0.4),
-            App.Vector(0.0, -0.8, -0.9),
-            App.Vector(0.0,  0.0, -1.2),
-            App.Vector(0.0,  0.8, -0.9),
-            App.Vector(0.0,  1.2, -0.4),
-            App.Vector(0.0,  1.5,  0.0),
-        ]
+        # NUOVA VERSIONE CON FUNZIONE CREATRICE DI SPLINE NELLO SKETCHER PER NODI E VERTICALE CON I PRIMI DUE PUNTI PER LATO
+        # PROVA CON IL SOLO sKETCH Sk_C0
+        sec_name = hull_section_name()
+        doc = 'Hull'
+        App.ActiveDocument=App.getDocument(doc)
+        sk_c0 = App.ActiveDocument.getObject('Sk_C0')
+        if not sk_c0:
+            App.Console.PrintError('Sketch Sk_C0 non trovato\n')
+            return
+        verts = sk_c0.Shape.Vertexes
+        n = len(verts)
+        if n < 2:
+            App.Console.PrintError('Sk_C0 non ha abbastanza vertici\n')
+            return
+        points = []
+        # creo la lista dei punti dal primo all'ultimo in ordine per la spline
+        start = 2
+        for i in range(start, 44, 2):
+            points.append(verts[i].Point)
+            #scrivo il nome del vertice aggiunto
+            App.Console.PrintMessage('Aggiunto vertice: ' + str(i) + ': ' + str(verts[i].Point) + "\n") # ultimo vertex 43, i 42
+        # aggiungo il punto di chiglia
+        points.append(verts[44].Point)
+        App.Console.PrintMessage('Aggiunto vertice di chiglia: ' + str(44) + ': ' + str(verts[44].Point) + "\n")
+        # aggiungo i punti dal fondo alla coperta in ordine inverso
+        for i in range(43, 2, -2):
+            points.append(verts[i].Point)
+            #scrivo il nome del vertice aggiunto
+            App.Console.PrintMessage('Aggiunto vertice: ' + str(i) + ': ' + str(verts[i].Point) + "\n")
+        #fine ordinamento punti
+        #inizio creazione bspline per nodi
+        sk_c0_bsp = 'Sk_C0_BSpline'
+        doc = App.ActiveDocument
 
-        # -----------------------------
-        # CREA CURVA INTERPOLATA (CURVES)
-        # -----------------------------
-        curve_obj = Interpolate.makeInterpolatedCurve(
-            points,
-            False   # periodic = False
-        )
+        sk = doc.addObject('Sketcher::SketchObject', sk_c0_bsp)
+        #  bspline dai nodi con estremità rettilinee
+        bs = Part.BSplineCurve()
+        
+        # Calcola tangenti per avere segmenti iniziali e finali retti
+        # initial_tangent = points[1] - points[0]
+        # final_tangent = points[-1] - points[-2]
+        
+        # bs.interpolate(points, InitialTangent=initial_tangent, FinalTangent=final_tangent)
+        bs.interpolate(points,)
+        shape = bs.toShape()
+        sk.Shape = shape
 
-        curve_obj.Label = "Curves_Section"
-
-        App.ActiveDocument.recompute()
 
 
     def Activated_OLD(self):
         
-        from App.Parts import BSplineCurve
-        from Curves import Sketch_On_Surface
         b39 = 1    # Hardchine value in GeneHull sheet in b39
         sec_name = hull_section_name()
         doc = 'Hull'
@@ -145,7 +164,6 @@ class DocCurvesHullCmd:
         self.part_creation(deck_name, deck_line_1)
         
         App.ActiveDocument.recompute()
-
 
 def register():
     Gui.addCommand(

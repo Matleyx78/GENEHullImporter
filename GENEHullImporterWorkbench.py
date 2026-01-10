@@ -20,6 +20,14 @@ class GENEHullImporterWorkbench(Gui.Workbench):
             "Hull Curves",
             ["GHI_Doc_Curves_Hull"]
         )
+        self.appendToolbar(
+            "Hull Offset Calculator",
+            ["HullOffsetCalculator"]
+        )
+        self.appendToolbar(
+            "Topol",
+            ["Topological test"]
+        )
         self.appendMenu(
             "Set Alias",
             ["GHI_Set_Alias"]
@@ -27,6 +35,10 @@ class GENEHullImporterWorkbench(Gui.Workbench):
         self.appendMenu(
             "Hull Doc and Sketch",
             ["GHI_Doc_Sketch_Hull"]
+        )
+        self.appendMenu(
+            "Hull Calculator",
+            ["HullOffsetCalculator"]
         )
     def GetClassName(self):
         return "Gui::PythonWorkbench"

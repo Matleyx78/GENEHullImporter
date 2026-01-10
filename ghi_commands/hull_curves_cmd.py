@@ -32,80 +32,19 @@ class DocCurvesHullCmd:
         sec_name = hull_section_name()
         doc = 'Hull'
         App.ActiveDocument=App.getDocument(doc)
-        sk_c0 = App.ActiveDocument.getObject('Sk_C0')
-        if not sk_c0:
-            App.Console.PrintError('Sketch Sk_C0 non trovato\n')
-            return
-        verts = sk_c0.Shape.Vertexes
-        n = len(verts)
-        if n < 2:
-            App.Console.PrintError('Sk_C0 non ha abbastanza vertici\n')
-            return
-        points = []
-        # creo la lista dei punti dal primo all'ultimo in ordine per la spline
-        start = 2
-        for i in range(start, 44, 2):
-            points.append(verts[i].Point)
-            #scrivo il nome del vertice aggiunto
-            App.Console.PrintMessage('Aggiunto vertice: ' + str(i) + ': ' + str(verts[i].Point) + "\n") # ultimo vertex 43, i 42
-        # aggiungo il punto di chiglia
-        points.append(verts[44].Point)
-        App.Console.PrintMessage('Aggiunto vertice di chiglia: ' + str(44) + ': ' + str(verts[44].Point) + "\n")
-        # aggiungo i punti dal fondo alla coperta in ordine inverso
-        for i in range(43, 2, -2):
-            points.append(verts[i].Point)
-            #scrivo il nome del vertice aggiunto
-            App.Console.PrintMessage('Aggiunto vertice: ' + str(i) + ': ' + str(verts[i].Point) + "\n")
-        #fine ordinamento punti
-        #inizio creazione bspline per nodi
-        sk_c0_bsp = 'Sk_C0_BSpline'
-        doc = App.ActiveDocument
-
-        sk = doc.addObject('Sketcher::SketchObject', sk_c0_bsp)
-        #  bspline dai nodi con estremità rettilinee
-        bs = Part.BSplineCurve()
-        
-        # Calcola tangenti per avere segmenti iniziali e finali retti
-        # initial_tangent = points[1] - points[0]
-        # final_tangent = points[-1] - points[-2]
-        
-        # bs.interpolate(points, InitialTangent=initial_tangent, FinalTangent=final_tangent)
-        bs.interpolate(points,)
-        shape = bs.toShape()
-        sk.Shape = shape
-
-
-
-    def Activated_OLD(self):
-        
-        b39 = 1    # Hardchine value in GeneHull sheet in b39
-        sec_name = hull_section_name()
-        doc = 'Hull'
-        App.ActiveDocument=App.getDocument(doc)
-        
-        keel_point = []
-        deck_line_1 = []
-        deck_line_2 = []
-        name_sk = 'Sk_Cent_line'
-        sk = App.ActiveDocument.getObject(name_sk)
-        verts_of_center_line = sk.Shape.Vertexes
-
-        for key in sec_name: 
-            name_sk = 'Sk_' + key           
-            sk = App.ActiveDocument.getObject(name_sk)
+        lista_sezioni = hull_section_name()  # lista dei nomi delle sezioni
+        chiglia = hull_center_line_name()
+        for key in lista_sezioni:
+            sk = App.ActiveDocument.getObject('Sk_' + key)
             if not sk:
-                App.Console.PrintError('Sketch non trovato\n')
+                App.Console.PrintError(f'Sketch Sk_{key} non trovato\n')
                 return
 
             verts = sk.Shape.Vertexes
             n = len(verts)
             if n < 2:
-                App.Console.PrintError('Sk_C0 non ha abbastanza vertici\n')
+                App.Console.PrintError(f'Sketch Sk_{key} non ha abbastanza vertici\n')
                 return
-            
-            keel_point.append(verts[44].Point)
-            deck_line_1.append(verts[0].Point)
-            deck_line_2.append(verts[1].Point)
 
             points = []
             # forward: take vertices starting from index 3, every 2 steps (odd indices)
@@ -118,51 +57,32 @@ class DocCurvesHullCmd:
             if last_even >= 1:
                 for i in range(last_even, 0, -2):
                     points.append(verts[i].Point)
+
+
+            # 3️⃣ Crea la BSpline di carena
+            curve = Part.BSplineCurve()
+            curve.interpolate(points)
+
+            # linee laterali
+            L1 = verts[1].Point
+            L2 = verts[3].Point
+            R1 = verts[0].Point
+            R2 = verts[2].Point
+            Line_r = Part.LineSegment(R1, R2)
+            Line_l = Part.LineSegment(L2, L1)
+
+            # S1 = Part.Shape([curve.toShape(), Line_r.toShape(), Line_l.toShape()])
+            S1 = Part.Shape([Line_l,curve, Line_r])
+            W = Part.Wire(S1.Edges)
             
-            name_part = "InterpolatedSection" + name_sk
 
-            self.part_creation(name_part, points)
-            
-            # -----------------------------
-            # PUNTI ORDINATI DI UNA SEZIONE
-            # -----------------------------
-            points_line_1 = []
-            points_line_2 = []
-            points_line_1.append(verts[0].Point)
-            points_line_1.append(verts[2].Point)
-            points_line_2.append(verts[1].Point)
-            points_line_2.append(verts[3].Point)
+            # 4️⃣ Crea l’oggetto Part::Feature
+            obj = App.ActiveDocument.addObject("Part::Feature", key + "_Curve")
+            # obj.Shape = curve.toShape()
+            # Part.show(W)
+            obj.Shape = W            
+            App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject(key + "_Curve"))
 
-            line1 = Part.LineSegment()
-            line1.StartPoint = points_line_1[0]
-            line1.EndPoint = points_line_1[1]
-            line2 = Part.LineSegment()
-            line2.StartPoint = points_line_2[0]
-            line2.EndPoint = points_line_2[1]
-            obj_line1 = App.ActiveDocument.addObject("Part::Feature", "Line1_Section" + name_sk)
-            obj_line1.Shape = line1.toShape()
-            obj_line2 = App.ActiveDocument.addObject("Part::Feature", "Line2_Section" + name_sk)
-            obj_line2.Shape = line2.toShape()
-
-            App.ActiveDocument.recompute()
-
-        # finish keel
-        keel_point.append(verts_of_center_line[18].Point)
-        keel_name = 'Keel_Line'
-        self.part_creation(keel_name, keel_point)
-        # finish deck line
-        # print(deck_line_2)
-        App.Console.PrintMessage('Indice: ' + str(deck_line_2[0]) + "\n")
-        App.Console.PrintMessage('Indice: ' + str(deck_line_2[10]) + "\n")
-        App.Console.PrintMessage('Indice: ' + str(len(deck_line_2)) + "\n")
-        deck_line_1.append(verts_of_center_line[18].Point)
-        for i in range(len(deck_line_2)-1,-1,-1):
-            
-            App.Console.PrintMessage('Indice: ' + str(i) + "\n")
-            deck_line_1.append(deck_line_2[i])
-        deck_name = 'Deck_Line'
-        self.part_creation(deck_name, deck_line_1)
-        
         App.ActiveDocument.recompute()
 
 def register():

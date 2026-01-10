@@ -83,5 +83,5 @@ def hull_section_value(spreadsheet):
         for key2 in section[key1]:
             sec_value[key1][key2] = {}
             for key3 in section[key1][key2]:
-                sec_value[key1][key2][key3] = spreadsheet.getContents(key1 + "_" + key2 + "_" + key3)
+                sec_value[key1][key2][key3] = spreadsheet.getContents(key1 + "_" + key2 + "_" + key3)   # getContents(C0_sheer_y)
     return sec_value

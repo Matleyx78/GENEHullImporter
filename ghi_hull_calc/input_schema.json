@@ -1,0 +1,461 @@
+{
+  "inputs": {
+    "Lwl": {
+      "row": 12,
+      "value": 8,
+      "unit": "m",
+      "comment": "Length of waterline"
+    },
+    "Tc": {
+      "row": 14,
+      "value": 0.37,
+      "unit": "m",
+      "comment": "Maximum draft of the hull body"
+    },
+    "X_Tc": {
+      "row": 15,
+      "value": 50,
+      "unit": "%Lwl",
+      "comment": "Position of draft"
+    },
+    "Xbow": {
+      "row": 17,
+      "value": 9,
+      "unit": "m",
+      "comment": "Hull bow position"
+    },
+    "Zbow": {
+      "row": 18,
+      "value": 0.85,
+      "unit": "m",
+      "comment": "Hull bow height (freeboard)"
+    },
+    "Cet": {
+      "row": 20,
+      "value": 3,
+      "unit": "-",
+      "comment": "Shape coefficient of the bow"
+    },
+    "Kbrion": {
+      "row": 21,
+      "value": 0,
+      "unit": "-",
+      "comment": "Brion parameter (0 no effect to 0.2)"
+    },
+    "Pui_q_av": {
+      "row": 23,
+      "value": 2.45,
+      "unit": "-",
+      "comment": "Polynomial keel front (2 to 3.5)"
+    },
+    "Pui_q_ar": {
+      "row": 24,
+      "value": 2.35,
+      "unit": "-",
+      "comment": "Polynomial keel rear (2 to 3.5)"
+    },
+    "X_tab_ar": {
+      "row": 26,
+      "value": -1.3,
+      "unit": "m",
+      "comment": "Rear end of transom"
+    },
+    "Z_tab_ar": {
+      "row": 27,
+      "value": 0.24,
+      "unit": "m",
+      "comment": "Transom height"
+    },
+    "Bg": {
+      "row": 29,
+      "value": 2.196,
+      "unit": "m",
+      "comment": "Sheer line width"
+    },
+    "X_Bg": {
+      "row": 30,
+      "value": 43,
+      "unit": "%Lwl",
+      "comment": "Sheer line position"
+    },
+    "Alfa": {
+      "row": 31,
+      "value": 2,
+      "unit": "deg",
+      "comment": "Sheer line angle"
+    },
+    "Pui_liv_y": {
+      "row": 32,
+      "value": 2,
+      "unit": "-",
+      "comment": "Sheer polynomial y (>1)"
+    },
+    "Cor_Pui_liv": {
+      "row": 33,
+      "value": 0.025,
+      "unit": "-",
+      "comment": "Sheer correction (0 to 0.04)"
+    },
+    "Pui_Cor_Pui": {
+      "row": 34,
+      "value": 2,
+      "unit": "-",
+      "comment": "Correction polynomial (1 to 2)"
+    },
+    "X_liv_ar": {
+      "row": 35,
+      "value": -0.6,
+      "unit": "m",
+      "comment": "Sheer rear end"
+    },
+    "Scow": {
+      "row": 36,
+      "value": 0.03,
+      "unit": "-",
+      "comment": "Scow bow (0 to 1.0)"
+    },
+    "Pui_Scow": {
+      "row": 37,
+      "value": 0.25,
+      "unit": "-",
+      "comment": "Scow polynomial (>0.2, usually 0.25 to 0.40)"
+    },
+    "Type_Chine": {
+      "row": 39,
+      "value": 0,
+      "unit": "-",
+      "comment": "Hard Chine type option (0=none, 1=Type1, 2=Type2)"
+    },
+    "Zhc_av": {
+      "row": 40,
+      "value": 0.75,
+      "unit": "m",
+      "comment": "Chine height at bow"
+    },
+    "Zhc_m": {
+      "row": 41,
+      "value": 0.2,
+      "unit": "m",
+      "comment": "Chine height at 35% Lwl"
+    },
+    "Zhc_ar": {
+      "row": 42,
+      "value": 0.42,
+      "unit": "m",
+      "comment": "Chine height at aft"
+    },
+    "Pui_hc_z": {
+      "row": 43,
+      "value": 2,
+      "unit": "-",
+      "comment": "Chine height polynomial"
+    },
+    "Z_liv_m": {
+      "row": 45,
+      "value": 0.72,
+      "unit": "m",
+      "comment": "Midship freeboard"
+    },
+    "Z_liv_ar": {
+      "row": 46,
+      "value": 0.74,
+      "unit": "m",
+      "comment": "Rear freeboard"
+    },
+    "Z_p_m": {
+      "row": 49,
+      "value": 0.83,
+      "unit": "m",
+      "comment": "Deck height at midship"
+    },
+    "X_p_ar": {
+      "row": 50,
+      "value": -0.7,
+      "unit": "m",
+      "comment": "Deck rear end position"
+    },
+    "Z_p_ar": {
+      "row": 51,
+      "value": 0.78,
+      "unit": "m",
+      "comment": "Deck rear end height"
+    },
+    "Kroof": {
+      "row": 53,
+      "value": 29,
+      "unit": "%B",
+      "comment": "Roof height in % of beam"
+    },
+    "Lwl (m)": {
+      "row": 12,
+      "value": 8.0,
+      "type": "<<< Length",
+      "comment": ""
+    },
+    "Maximum draft of the hull body  :": {
+      "row": 13,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Tc (m)": {
+      "row": 14,
+      "value": 0.37,
+      "type": "<<< Height",
+      "comment": "positioned at X Tc"
+    },
+    "X Tc (%Lwl)": {
+      "row": 15,
+      "value": 50.0,
+      "type": "",
+      "comment": ""
+    },
+    "Hull bow :": {
+      "row": 16,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Xbow (m)": {
+      "row": 17,
+      "value": 9.0,
+      "type": "<<< Length",
+      "comment": "should be > Lwl"
+    },
+    "Zbow (m)": {
+      "row": 18,
+      "value": 0.85,
+      "type": "<<< Height",
+      "comment": "Front freeboard"
+    },
+    "Shape coefficient of the bow :": {
+      "row": 19,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Cet": {
+      "row": 20,
+      "value": 3.0,
+      "type": "",
+      "comment": "can be 0,1 to 100 ; small >> rounded shape bow; large >> square shape bow"
+    },
+    "Kbrion": {
+      "row": 21,
+      "value": 0.0,
+      "type": "",
+      "comment": "recommended : 0 (no effect) to 0,2"
+    },
+    "Polynomials of the keel line, front part and rear part :": {
+      "row": 22,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Pui q av": {
+      "row": 23,
+      "value": 2.45,
+      "type": "",
+      "comment": "recommended : 2 to 3,5"
+    },
+    "Pui q ar": {
+      "row": 24,
+      "value": 2.35,
+      "type": "",
+      "comment": "recommended : 2 to 3,5"
+    },
+    "Rear end of the transom :": {
+      "row": 25,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "X tab ar (m)": {
+      "row": 26,
+      "value": -1.3,
+      "type": "<<< Length",
+      "comment": "should be < 0"
+    },
+    "Z tab ar (m)": {
+      "row": 27,
+      "value": 0.24,
+      "type": "<<< Height",
+      "comment": "should be > 0"
+    },
+    "Sheer line, in horizontal projection xy :": {
+      "row": 28,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Bg (m)": {
+      "row": 29,
+      "value": 2.196,
+      "type": "<<< width",
+      "comment": "Any set of Bg, X Bg et Alfa values lead to any Bmax positioned at Xb (more info and examples in the user guide)"
+    },
+    "X Bg (% Lwl)": {
+      "row": 30,
+      "value": 43.0,
+      "type": "",
+      "comment": "can be usually 40 to 60, but other values can be tested"
+    },
+    "Alfa (°)": {
+      "row": 31,
+      "value": 2.0,
+      "type": "",
+      "comment": "> Bmax (m)"
+    },
+    "Pui liv y": {
+      "row": 32,
+      "value": 2.0,
+      "type": "",
+      "comment": "should be >1 ;"
+    },
+    "Cor Pui liv": {
+      "row": 33,
+      "value": 0.025,
+      "type": "",
+      "comment": "recommended : 0 to 0,04 ; negative value can be tested"
+    },
+    "Pui Cor Pui": {
+      "row": 34,
+      "value": 2.0,
+      "type": "",
+      "comment": "recommended : 1 to 2"
+    },
+    "X liv ar (m)": {
+      "row": 35,
+      "value": -0.6,
+      "type": "<<< Length",
+      "comment": "sheer line rear end,"
+    },
+    "Scow": {
+      "row": 36,
+      "value": 0.03,
+      "type": "",
+      "comment": "'0 (no scow bow) to 1,0 (big size scow bow)"
+    },
+    "Pui Scow": {
+      "row": 37,
+      "value": 0.25,
+      "type": "",
+      "comment": "should be > 0,2 , usual values 0,25 to 0,40"
+    },
+    "Option Hard Chine line, in vertical projection xz :": {
+      "row": 38,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Type": {
+      "row": 39,
+      "value": 0.0,
+      "type": "",
+      "comment": ";"
+    },
+    "1,2 Zhc av (m)": {
+      "row": 40,
+      "value": 0.75,
+      "type": "",
+      "comment": "Chine height at bow ; should be >0 and < Zbow"
+    },
+    "2 Zhc m (m)": {
+      "row": 41,
+      "value": 0.2,
+      "type": "",
+      "comment": "Chine height at 35% Lwl ; should be >0 and < Z liv m"
+    },
+    "1,2 Zhc ar (m)": {
+      "row": 42,
+      "value": 0.42,
+      "type": "",
+      "comment": "Chine height at aft ; should be >0 and < Z liv ar"
+    },
+    "Pui hc z": {
+      "row": 43,
+      "value": 2.0,
+      "type": "",
+      "comment": ", should be > 0, usual values 0,25 to 5"
+    },
+    "Sheer line, in vertical projection xz :": {
+      "row": 44,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Z liv m (m)": {
+      "row": 45,
+      "value": 0.72,
+      "type": "<<< Height",
+      "comment": "Midship Freeboard (at 35% Lwl)"
+    },
+    "Z liv ar (m)": {
+      "row": 46,
+      "value": 0.74,
+      "type": "<<< Height",
+      "comment": "Rear freeboard"
+    },
+    "Deck / central line rear end": {
+      "row": 48,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "Z p m (m)": {
+      "row": 49,
+      "value": 0.83,
+      "type": "<<< Height",
+      "comment": "Deck height at 35% Lwl"
+    },
+    "X p ar (m)": {
+      "row": 50,
+      "value": -0.7,
+      "type": "<<< Length",
+      "comment": "Should be < 0 and either X tab ar < X p ar < X liv ar (inverted transom) or X p ar < X liv ar < Xtab ar (classic transom)"
+    },
+    "Z p ar (m)": {
+      "row": 51,
+      "value": 0.78,
+      "type": "<<< Height",
+      "comment": "recommended : Z p ar > Z liv ar"
+    },
+    "Kroof (%B)": {
+      "row": 53,
+      "value": 29.0,
+      "type": "",
+      "comment": "For a standard roof from C3 to C8, Kroof is roof height in % of the beam"
+    },
+    "Sections :": {
+      "row": 54,
+      "value": null,
+      "type": "",
+      "comment": ""
+    },
+    "PE1": {
+      "row": 55,
+      "value": null,
+      "type": "PE2",
+      "comment": "All PE1  0,5  ; usual values : 1 to 4"
+    },
+    "Fore": {
+      "row": 56,
+      "value": 2.0,
+      "type": "1,000",
+      "comment": "Fore and Aft C PE1 1"
+    },
+    "Mid": {
+      "row": 57,
+      "value": 3.315,
+      "type": "1,695",
+      "comment": "Mid C PE1 < 1 (tumbelhome shape)"
+    },
+    "Aft": {
+      "row": 58,
+      "value": 2.0,
+      "type": "2,800",
+      "comment": "All PE2 > 0  ; usual values = from 1 (V shape) to > 2 (U shape)"
+    }
+  },
+  "description": "Hull parameters from Gene-Hull ODS rows 11-58"
+}

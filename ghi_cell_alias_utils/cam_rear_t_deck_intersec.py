@@ -16,9 +16,10 @@
 #          l_15_z: value of G15
 def rt_deck_inter_name():                         # section name and column letter
     name ={}
-    for i in range(0,50):
-        key = 'RT_DI_' + str(i)
-        name[key] = {'x' :'E', 'y' : 'F', 'z' : 'G',}
+    name['RT_DI'] = {'x' :'E', 'y' : 'F', 'z' : 'G',}
+    # for i in range(0,50):
+    #     key = 'RT_DI_' + str(i)
+    #     name[key] = {'x' :'E', 'y' : 'F', 'z' : 'G',}
     return name
 
 def rt_deck_inter_rows():                         # row name and row number
@@ -49,5 +50,6 @@ def rt_deck_inter_value(spreadsheet):
         for key2 in section[key1]:
             sec_value[key1][key2] = {}
             for key3 in section[key1][key2]:
+                print(f'Getting value for {key1}_{key2}_{key3}')
                 sec_value[key1][key2][key3] = spreadsheet.getContents(key1 + "_" + key2 + "_" + key3)
     return sec_value

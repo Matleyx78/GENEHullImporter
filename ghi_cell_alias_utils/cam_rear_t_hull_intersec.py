@@ -16,9 +16,10 @@
 #          l_15_z: value of G15
 def rt_hull_inter_name():                         # section name and column letter
     name ={}
-    for i in range(0,50):
-        key = 'RT_HI_' + str(i)
-        name[key] = {'x' :'A', 'y' : 'B', 'z' : 'C',}
+    name['RT_HI'] = {'x' :'A', 'y' : 'B', 'z' : 'C',}
+    # for i in range(0,50):
+    #     key = 'RT_HI_' + str(i)
+    #     name[key] = {'x' :'A', 'y' : 'B', 'z' : 'C',}
     return name
 
 def rt_hull_inter_rows():                         # row name and row number

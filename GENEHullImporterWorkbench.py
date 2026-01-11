@@ -36,9 +36,9 @@ class GENEHullImporterWorkbench(Gui.Workbench):
             "Hull Doc and Sketch",
             ["GHI_Doc_Sketch_Hull"]
         )
-        self.appendMenu(
-            "Hull Calculator",
-            ["HullOffsetCalculator"]
-        )
+        # self.appendMenu(
+        #     "Hull Calculator",
+        #     ["HullOffsetCalculator"]
+        # )
     def GetClassName(self):
         return "Gui::PythonWorkbench"

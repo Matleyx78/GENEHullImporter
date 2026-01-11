@@ -5,6 +5,7 @@ import Sketcher
 
 from ghi_cell_alias_utils.cam_hull_section import hull_section_rows
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_rows
+from ghi_varset_utils.ghi_varset_creation import varset_creation
 
 def hull_doc_creation(section_data):
     name = 'Hull'
@@ -13,15 +14,7 @@ def hull_doc_creation(section_data):
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Varset").Label="Hull_Varset" 
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Sketch").Label="Hull_Sketch" 
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Curves").Label="Hull_Curves" 
-    for key1 in section_data:
-        varset = App.activeDocument().addObject('App::VarSet',key1 + '_Data')
-        App.activeDocument().getObject("Hull_Varset").addObject(App.activeDocument().getObject(key1 + '_Data'))
-        for key2 in section_data[key1]:                 # Example: section_data['C0']
-            for key3, value in section_data[key1][key2].items():
-                App.Console.PrintMessage(f'Impostazione {key1}_{key2}_{key3} a {value}\n')
-                varset.addProperty('App::PropertyFloat', key2 + '_' + key3, 'Sections', '')
-                # assegna la proprietà dinamicamente usando setattr
-                setattr(varset, key2 + '_' + key3, float(value) * 10)  # moltiplica per 10 per convertire da cm a mm
+    varset_creation_data = varset_creation(section_data)
     App.ActiveDocument=App.getDocument(name)
     Gui.ActiveDocument=Gui.getDocument(name)
     return name

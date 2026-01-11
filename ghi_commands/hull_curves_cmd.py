@@ -34,6 +34,9 @@ class DocCurvesHullCmd:
         App.ActiveDocument=App.getDocument(doc)
         lista_sezioni = hull_section_name()  # lista dei nomi delle sezioni
         chiglia = hull_center_line_name()
+        keel_point = []
+        deck_line_1 = []
+        deck_line_2 = []
         for key in lista_sezioni:
             sk = App.ActiveDocument.getObject('Sk_' + key)
             if not sk:
@@ -45,6 +48,10 @@ class DocCurvesHullCmd:
             if n < 2:
                 App.Console.PrintError(f'Sketch Sk_{key} non ha abbastanza vertici\n')
                 return
+            
+            keel_point.append(verts[44].Point)
+            deck_line_1.append(verts[0].Point)
+            deck_line_2.append(verts[1].Point)
 
             points = []
             # forward: take vertices starting from index 3, every 2 steps (odd indices)
@@ -82,6 +89,61 @@ class DocCurvesHullCmd:
             # Part.show(W)
             obj.Shape = W            
             App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject(key + "_Curve"))
+
+        for key in chiglia:
+            sk = App.ActiveDocument.getObject('Sk_' + key)
+            if not sk:
+                App.Console.PrintError(f'Sketch Sk_{key} non trovato\n')
+                return
+
+            verts = sk.Shape.Vertexes
+            n = len(verts)
+            if n < 2:
+                App.Console.PrintError(f'Sketch Sk_{key} non ha abbastanza vertici\n')
+                return
+
+            first_cen_line_point = verts[0].Point
+            last_cen_line_point = verts[n-1].Point
+            points = []
+            # forward: take vertices starting from index 3, every 2 steps (odd indices)
+            start = 0
+            for i in range(start, n, 1):
+                points.append(verts[i].Point)
+
+            # 3️⃣ Crea la BSpline di carena
+            curve = Part.BSplineCurve()
+            curve.interpolate(points)
+            S1 = Part.Shape([curve])
+            W = Part.Wire(S1.Edges)
+            obj = App.ActiveDocument.addObject("Part::Feature", key + "_Curve")
+            obj.Shape = W            
+            App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject(key + "_Curve"))
+
+
+        deck_line_1.append(last_cen_line_point)
+
+        for i in range(len(deck_line_2)-1,-1,-1):            
+            App.Console.PrintMessage('Indice: ' + str(i) + "\n")
+            deck_line_1.append(deck_line_2[i])
+
+        # cen line
+        curve = Part.BSplineCurve()
+        curve.interpolate(deck_line_1)
+        S1 = Part.Shape([curve])
+        W = Part.Wire(S1.Edges)
+        obj = App.ActiveDocument.addObject("Part::Feature", "Cen_Line_Curve")
+        obj.Shape = W            
+        App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject("Cen_Line_Curve"))
+
+        # keel line
+        keel_point.append(last_cen_line_point)
+        curve = Part.BSplineCurve()
+        curve.interpolate(keel_point)
+        S1 = Part.Shape([curve])
+        W = Part.Wire(S1.Edges)
+        obj = App.ActiveDocument.addObject("Part::Feature", "Keel_Line_Curve")
+        obj.Shape = W            
+        App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject("Keel_Line_Curve"))        
 
         App.ActiveDocument.recompute()
 

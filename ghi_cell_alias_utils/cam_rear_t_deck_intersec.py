@@ -50,6 +50,6 @@ def rt_deck_inter_value(spreadsheet):
         for key2 in section[key1]:
             sec_value[key1][key2] = {}
             for key3 in section[key1][key2]:
-                print(f'Getting value for {key1}_{key2}_{key3}')
+                # print(f'Getting value for {key1}_{key2}_{key3}')
                 sec_value[key1][key2][key3] = spreadsheet.getContents(key1 + "_" + key2 + "_" + key3)
     return sec_value

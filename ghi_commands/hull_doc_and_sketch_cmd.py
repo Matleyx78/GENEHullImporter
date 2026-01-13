@@ -38,6 +38,7 @@ class DocSketchHullCmd:
         # creo le sezioni della carena
         hull_section_sketch_creation(body_name)
         # creo la center line
+        hull_center_line_sketch_creation(body_name)
         # creo la keel line
         # creo la deck line
         # creo la punteggiatura della parte posteriore
@@ -54,7 +55,7 @@ class DocSketchHullCmd:
         
         # App.ActiveDocument.recompute()
         # hull_center_line_sketch_creation(center_line_name,body_name)
-        # App.ActiveDocument.recompute()
+        App.ActiveDocument.recompute()
 
 
 

@@ -98,23 +98,27 @@ def point_creation_sketch_section(sketch,body,valid_values_sec,name_sec):
     
     constraintList = []
     
-    # for key in valid_values_sec:
-    #     prop = key
-    #     next_constraint_id = len(ActiveSketch.Constraints)
-    #     ActiveSketch.addConstraint(Sketcher.Constraint('DistanceX', -1, 1, index_point, 1, 250))  # -1,1 è l'origine, 0,1  è il punto geolist0 tuttobordo(1)
-    #     ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_y')
-    #     next_constraint_id = len(ActiveSketch.Constraints)
-    #     ActiveSketch.addConstraint(Sketcher.Constraint('DistanceY', -1, 1, index_point, 1, -250))
-    #     ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_z')
-    #     index_point = index_point + 1
-    #     if index_point != 45:
-    #         next_constraint_id = len(ActiveSketch.Constraints)
-    #         ActiveSketch.addConstraint(Sketcher.Constraint('DistanceX', -1, 1, index_point, 1, 250))  # -1,1 è l'origine, 0,1  è il punto geolist0 tuttobordo(1)
-    #         ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', '-' + name_sec + '_Data.' + prop + '_y')
-    #         next_constraint_id = len(ActiveSketch.Constraints)
-    #         ActiveSketch.addConstraint(Sketcher.Constraint('DistanceY', -1, 1, index_point, 1, -250))
-    #         ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_z')
-    #         index_point = index_point + 1
+    for key in valid_values_sec:
+        print(f'indice_point: {index_point} - key: {key}')
+        # prop = key
+        # next_constraint_id = len(ActiveSketch.Constraints)
+        # first_step_coord = (index_point + 10) * 10
+        # ActiveSketch.addConstraint(Sketcher.Constraint('DistanceX', -1, 1, index_point, 1, first_step_coord))  # -1,1 è l'origine, 0,1  è il punto geolist0 tuttobordo(1)
+        # # ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_y')
+        # next_constraint_id = len(ActiveSketch.Constraints)
+        # ActiveSketch.addConstraint(Sketcher.Constraint('DistanceY', -1, 1, index_point, 1, -first_step_coord))
+        # # ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_z')
+        index_point = index_point + 1
+        
+        if index_point != 45:        
+            print(f'indice_point: {index_point} - key: {key}')
+            # next_constraint_id = len(ActiveSketch.Constraints)
+            # ActiveSketch.addConstraint(Sketcher.Constraint('DistanceX', -1, 1, index_point, 1, 250))  # -1,1 è l'origine, 0,1  è il punto geolist0 tuttobordo(1)
+            # # ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', '-' + name_sec + '_Data.' + prop + '_y')
+            # next_constraint_id = len(ActiveSketch.Constraints)
+            # ActiveSketch.addConstraint(Sketcher.Constraint('DistanceY', -1, 1, index_point, 1, -250))
+            # # ActiveSketch.setExpression(f'Constraints[{next_constraint_id}]', name_sec + '_Data.' + prop + '_z')
+            index_point = index_point + 1
 
 def point_creation_sketch_center_line(sketch,body,varset):    
     body = App.ActiveDocument.getObject(body)

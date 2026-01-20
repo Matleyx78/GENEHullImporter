@@ -5,6 +5,7 @@ from ghi_cell_alias_utils.cam_hull_section import hull_section_cell_mapping
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_cell_mapping
 from ghi_cell_alias_utils.cam_rear_t_deck_intersec import rt_deck_inter_cell_mapping
 from ghi_cell_alias_utils.cam_rear_t_hull_intersec import rt_hull_inter_cell_mapping
+
 #   ALL SECTION VALUE
 from ghi_cell_alias_utils.cam_hull_section import hull_section_value
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value

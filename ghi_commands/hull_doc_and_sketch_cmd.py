@@ -25,13 +25,6 @@ class DocSketchHullCmd:
         doc_import = 'GH_Import_Doc'
         App.ActiveDocument=App.getDocument(doc_import)
         sheet = App.activeDocument().getObjectsByLabel("GH_Offset_Sheet")[0]
-        # varset_creation(sheet)
-
-
-
-        sec_value = hull_section_value(sheet)               #list['name_section']['row_name_or_number']['coord'] = value
-        sec_value2 = hull_center_line_value(sheet)          #list['name_section']['row_name_or_number']['coord'] = value
-        list_val = {**sec_value, **sec_value2}
         doc_name = hull_doc_creation(sheet)              # da qui ci sono i varset pronti
         # body creation
         body_name = hull_body_creation()                

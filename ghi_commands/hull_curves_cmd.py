@@ -37,6 +37,8 @@ class DocCurvesHullCmd:
         keel_point = []
         deck_line_1 = []
         deck_line_2 = []
+        front_last_cen_line_point = None
+        rear_last_cen_line_point = None
         for key in lista_sezioni:
             sk = App.ActiveDocument.getObject('Sk_' + key)
             if not sk:
@@ -49,32 +51,29 @@ class DocCurvesHullCmd:
                 App.Console.PrintError(f'Sketch Sk_{key} non ha abbastanza vertici\n')
                 return
             
-            keel_point.append(verts[44].Point)
-            deck_line_1.append(verts[0].Point)
-            deck_line_2.append(verts[1].Point)
+            keel_point.append(verts[1].Point)
+            deck_line_1.append(verts[43].Point)
+            deck_line_2.append(verts[44].Point)
 
             points = []
+            points.append(verts[0].Point)
             # forward: take vertices starting from index 3, every 2 steps (odd indices)
             start = 3
-            for i in range(start, n, 2):
+            for i in range(start, 43, 2):
                 points.append(verts[i].Point)
-
-            # reverse: take the last even index < n down to 1, step -2
-            last_even = (n - 1) if ((n - 1) % 2 == 0) else (n - 2)
-            if last_even >= 1:
-                for i in range(last_even, 0, -2):
-                    points.append(verts[i].Point)
-
+            points.append(verts[1].Point)       # keel point
+            for i in range(42, 2, -2):
+                points.append(verts[i].Point)
 
             # 3️⃣ Crea la BSpline di carena
             curve = Part.BSplineCurve()
             curve.interpolate(points)
 
             # linee laterali
-            L1 = verts[1].Point
-            L2 = verts[3].Point
-            R1 = verts[0].Point
-            R2 = verts[2].Point
+            L1 = verts[4].Point
+            L2 = verts[44].Point     #verts[3] = Vertex 4
+            R1 = verts[43].Point
+            R2 = verts[0].Point
             Line_r = Part.LineSegment(R1, R2)
             Line_l = Part.LineSegment(L2, L1)
 
@@ -102,13 +101,29 @@ class DocCurvesHullCmd:
                 App.Console.PrintError(f'Sketch Sk_{key} non ha abbastanza vertici\n')
                 return
 
-            first_cen_line_point = verts[0].Point
-            last_cen_line_point = verts[n-1].Point
+            rear_last_cen_line_point = verts[18].Point
+            front_last_cen_line_point = verts[0].Point
             points = []
             # forward: take vertices starting from index 3, every 2 steps (odd indices)
-            start = 0
-            for i in range(start, n, 1):
-                points.append(verts[i].Point)
+            points.append(verts[0].Point)
+            points.append(verts[17].Point)
+            points.append(verts[16].Point)
+            points.append(verts[3].Point)
+            points.append(verts[13].Point)
+            points.append(verts[12].Point)
+            points.append(verts[11].Point)
+            points.append(verts[10].Point)
+            points.append(verts[9].Point)
+            points.append(verts[8].Point)
+            points.append(verts[7].Point)
+            points.append(verts[6].Point)
+            points.append(verts[5].Point)
+            points.append(verts[4].Point)
+            points.append(verts[2].Point)
+            points.append(verts[1].Point)
+            points.append(verts[14].Point)
+            points.append(verts[15].Point)
+            points.append(verts[18].Point)
 
             # 3️⃣ Crea la BSpline di carena
             curve = Part.BSplineCurve()
@@ -120,7 +135,7 @@ class DocCurvesHullCmd:
             App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject(key + "_Curve"))
 
 
-        deck_line_1.append(last_cen_line_point)
+        deck_line_1.append(front_last_cen_line_point)
 
         for i in range(len(deck_line_2)-1,-1,-1):            
             App.Console.PrintMessage('Indice: ' + str(i) + "\n")
@@ -136,10 +151,16 @@ class DocCurvesHullCmd:
         App.activeDocument().getObject("Hull_Curves").addObject(App.activeDocument().getObject("Cen_Line_Curve"))
 
         # keel line
-        keel_point.append(last_cen_line_point)
+        # aggiungo un punto per coordinate
+        vector=App.Vector(0, -8250, 150)        
+        keel_point.append(vector)
+        K1 = front_last_cen_line_point
+        K2 = vector
+        Line_k = Part.LineSegment(K1, K2)
+        # keel_point.append(front_last_cen_line_point)
         curve = Part.BSplineCurve()
         curve.interpolate(keel_point)
-        S1 = Part.Shape([curve])
+        S1 = Part.Shape([curve,Line_k])
         W = Part.Wire(S1.Edges)
         obj = App.ActiveDocument.addObject("Part::Feature", "Keel_Line_Curve")
         obj.Shape = W            

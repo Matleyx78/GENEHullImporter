@@ -20,13 +20,13 @@ class GENEHullImporterWorkbench(Gui.Workbench):
             "Hull Curves",
             ["GHI_Doc_Curves_Hull"]
         )
+        # self.appendToolbar(
+        #     "Hull Offset Calculator",
+        #     ["HullOffsetCalculator"]
+        # )
         self.appendToolbar(
-            "Hull Offset Calculator",
-            ["HullOffsetCalculator"]
-        )
-        self.appendToolbar(
-            "Topol",
-            ["Topological test"]
+            "Test Command",
+            ["Command test"]
         )
         self.appendMenu(
             "Set Alias",

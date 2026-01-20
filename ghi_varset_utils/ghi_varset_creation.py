@@ -40,7 +40,7 @@ def varset_creation(sheet):
                         float(val)
                     except ValueError:
                         row_valid = False
-                        print(f'Skipping section {sec_name} due to non-numeric value at {sec_name}_{row_name}_{coord}: {val}')
+                        #print(f'Skipping section {sec_name} due to non-numeric value at {sec_name}_{row_name}_{coord}: {val}')
                 if row_valid:   
                     valid_sec[sec_name][row_name] = {}             
                     for coord in cel_map[sec_name][row_name]:   # es. 'x', 'y', 'z'
@@ -84,3 +84,11 @@ def varset_validate(section_cell_map, doc, body):
                         if prop_full_name in varset_data.PropertiesList:
                             valid_sec_values[name][prop_name][coord] = getattr(varset_data, prop_full_name)
     return valid_sec_values
+
+def varset_value_available(varset_name):
+    doc = App.ActiveDocument
+    if doc and doc.getObject(varset_name + '_Name') and doc.getObject(varset_name + '_Data'):
+        print(f'VarSet {varset_name} is available.')
+    else:
+        print(f'VarSet {varset_name} is NOT available.')
+    return False

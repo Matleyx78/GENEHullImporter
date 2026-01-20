@@ -2,7 +2,7 @@ import FreeCAD
 import FreeCADGui
 import Part
 
-from ghi_topol_map.test_topol import topot_test
+from ghi_varset_utils.ghi_varset_creation import varset_value_available
 
 class TestCmd:
 
@@ -28,11 +28,11 @@ class TestCmd:
             body = doc.addObject("PartDesign::Body", "TestBody")
             doc.recompute()
             
-        topot_test(30)
+        varset_available = varset_value_available("C0")
         doc.recompute()
 
 def register():
     FreeCADGui.addCommand(
-        "Topological test",
+        "Command test",
         TestCmd()
     )

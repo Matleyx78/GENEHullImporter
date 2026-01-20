@@ -38,7 +38,7 @@ def hull_section_sketch_creation(body_name):        #   sketch creation with poi
     hul_sec_map = hull_section_cell_mapping()    
     valid_values = varset_validate(hul_sec_map,doc, body_name)
     for key1 in valid_values:
-        print(f'Creating sketch for section: {key1}')
+        # print(f'Creating sketch for section: {key1}')
         varset = doc.getObject(key1 + '_Data')
         sk_name = 'Sk_' + key1
         sketch = App.ActiveDocument.addObject('Sketcher::SketchObject', sk_name)
@@ -100,7 +100,7 @@ def point_creation_sketch_section(sketch,body,valid_values_sec,name_sec):
     index_point = 0
     
     constraintList = []
-    print(f'Sezioni: {len(valid_values_sec)}')
+    # print(f'Sezioni: {len(valid_values_sec)}')
     point_for_keel_and_sheer = {}
     point_for_keel_and_sheer['keel'] = {}
     point_for_keel_and_sheer['sheer'] = {}

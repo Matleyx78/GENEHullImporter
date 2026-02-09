@@ -1,3 +1,4 @@
 # Ignora file temporanei e di log
 *.pyc
 __pycache__/
+work_in_progress/

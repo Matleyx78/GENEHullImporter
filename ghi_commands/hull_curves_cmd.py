@@ -8,6 +8,8 @@ from ghi_cell_alias_utils.cam_hull_section import hull_section_value
 from ghi_cell_alias_utils.cam_hull_section import hull_section_name
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_name
+from ghi_cell_alias_utils.cam_gh_other_val import other_values_value
+from ghi_cell_alias_utils.cam_gh_other_val import other_values_name
 
 class DocCurvesHullCmd:
 
@@ -29,11 +31,14 @@ class DocCurvesHullCmd:
     def Activated(self):
         # NUOVA VERSIONE CON FUNZIONE CREATRICE DI SPLINE NELLO SKETCHER PER NODI E VERTICALE CON I PRIMI DUE PUNTI PER LATO
         # PROVA CON IL SOLO sKETCH Sk_C0
+        # confronto i due valori nei varset Chine_and_Sheer_line_Car2_z_s e Chine_and_Sheer_line_Car2_z_c per vedere se sono uguali
+        
         sec_name = hull_section_name()
         doc = 'Hull'
         App.ActiveDocument=App.getDocument(doc)
         lista_sezioni = hull_section_name()  # lista dei nomi delle sezioni
         chiglia = hull_center_line_name()
+        other_values = other_values_name()
         keel_point = []
         deck_line_1 = []
         deck_line_2 = []

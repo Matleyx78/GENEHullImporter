@@ -7,6 +7,7 @@ from ghi_cell_alias_utils.cam_rear_t_hull_intersec import rt_hull_inter_cell_map
 from ghi_cell_alias_utils.cam_rear_t_deck_intersec import rt_deck_inter_cell_mapping
 from ghi_cell_alias_utils.cam_keel_line import keel_line_cell_mapping
 from ghi_cell_alias_utils.cam_chine_and_sheer_line import chine_and_sheer_line_cell_mapping
+from ghi_cell_alias_utils.cam_gh_other_val import other_values_cell_mapping
 
 class SetAliasCmd:
 
@@ -26,7 +27,9 @@ class SetAliasCmd:
         sect['rear_t_deck_intersec'] = rt_deck_inter_cell_mapping()
         sect['keel_line'] = keel_line_cell_mapping()
         sect['chine_and_sheer_line'] = chine_and_sheer_line_cell_mapping()
-        # App.Console.PrintMessage(sect)
+        sect['other_values'] = other_values_cell_mapping()
+        # stampo l'array
+        #App.Console.PrintMessage(sect)
         for key1 in sect:
             for key2 in sect[key1]:
                 for key3 in sect[key1][key2]:

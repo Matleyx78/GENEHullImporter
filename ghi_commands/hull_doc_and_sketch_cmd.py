@@ -32,10 +32,10 @@ class DocSketchHullCmd:
         val2 = varset_get_value(doc_name, 'Chine_and_Sheer_line', 'Car2_z_s')
         if val1 == val2:
             App.Console.PrintMessage('Hard chine type: Uguale\n')
-            hc_type = 0
+            hc_type = 0 # non dritto ma stondato
         else:
             App.Console.PrintMessage('Hard chine type: Diverso\n')
-            hc_type = 1
+            hc_type = 1 # dritto
         # body creation        
         body_name = hull_body_creation()                
         App.ActiveDocument.recompute()
@@ -46,7 +46,7 @@ class DocSketchHullCmd:
         # creo la keel line
         # creo la deck line
         # creo la punteggiatura della parte posteriore
-        rear_transom_creation(doc_name, body_name)
+        rear_transom_creation(doc_name, body_name, hc_type)
 
 
 

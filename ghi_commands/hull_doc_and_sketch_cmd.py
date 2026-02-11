@@ -3,6 +3,7 @@ import FreeCADGui as Gui
 import Sketcher
 
 from ghi_varset_utils.ghi_varset_creation import varset_creation
+from ghi_varset_utils.ghi_varset_creation import varset_get_value
 from ghi_obj_creation.hull_creation import hull_doc_creation
 from ghi_obj_creation.hull_creation import hull_body_creation
 from ghi_obj_creation.hull_creation import hull_section_sketch_creation
@@ -26,7 +27,16 @@ class DocSketchHullCmd:
         App.ActiveDocument=App.getDocument(doc_import)
         sheet = App.activeDocument().getObjectsByLabel("GH_Offset_Sheet")[0]
         doc_name = hull_doc_creation(sheet)              # da qui ci sono i varset pronti
-        # body creation
+        # check hard chine type
+        val1 = varset_get_value(doc_name, 'Chine_and_Sheer_line', 'Car2_z_c')
+        val2 = varset_get_value(doc_name, 'Chine_and_Sheer_line', 'Car2_z_s')
+        if val1 == val2:
+            App.Console.PrintMessage('Hard chine type: Uguale\n')
+            hc_type = 0
+        else:
+            App.Console.PrintMessage('Hard chine type: Diverso\n')
+            hc_type = 1
+        # body creation        
         body_name = hull_body_creation()                
         App.ActiveDocument.recompute()
         # creo le sezioni della carena

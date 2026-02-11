@@ -103,3 +103,17 @@ def varset_value_available(varset_name):
     else:
         print(f'VarSet {varset_name} is NOT available.')
     return False
+
+def varset_get_value(doc_name, varset_name, property_name):
+    App.ActiveDocument = App.getDocument(doc_name)    
+    doc = App.ActiveDocument
+    try:
+        varset = doc.getObject(varset_name + '_Data')
+        val = getattr(varset, property_name)
+        print(f'Value of {property_name} in {varset_name}_Data: {val}')
+        if property_name in varset.PropertiesList:
+            val = getattr(varset, property_name)
+    except Exception as e:
+        print(f'Error getting VarSet: {varset_name}_Data: {e}')
+        return False
+    return val

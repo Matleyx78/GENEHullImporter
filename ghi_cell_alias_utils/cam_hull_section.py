@@ -15,22 +15,22 @@
 #          l_15_z: value of G15
 def hull_section_name():                         # section name and column letter
     name ={}
-    name['Car2'] = {'y' :'C', 'z' : 'D',}
-    name['C0'] = {'y' :'E', 'z' : 'F',}
-    name['C1'] = {'y' :'G', 'z' : 'H',}
-    name['C2'] = {'y' :'I', 'z' : 'J',}
-    name['C3'] = {'y' :'K', 'z' : 'L',}
-    name['C4'] = {'y' :'M', 'z' : 'N',}
-    name['C5'] = {'y' :'O', 'z' : 'P',}
-    name['C6'] = {'y' :'Q', 'z' : 'R',}
-    name['C7'] = {'y' :'S', 'z' : 'T',}
-    name['C8'] = {'y' :'U', 'z' : 'V',}
-    name['C9'] = {'y' :'W', 'z' : 'X',}
-    name['C95'] = {'y' :'Y', 'z' : 'Z',}
-    name['C99'] = {'y' :'AA', 'z' : 'AB',}
-    name['C10'] = {'y' :'AC', 'z' : 'AD',}
-    name['Cav1'] = {'y' :'AE', 'z' : 'AF',}
-    name['Cav2'] = {'y' :'AG', 'z' : 'AH',}
+    name['Sec_Car2'] = {'y' :'C', 'z' : 'D',}
+    name['Sec_C0'] = {'y' :'E', 'z' : 'F',}
+    name['Sec_C1'] = {'y' :'G', 'z' : 'H',}
+    name['Sec_C2'] = {'y' :'I', 'z' : 'J',}
+    name['Sec_C3'] = {'y' :'K', 'z' : 'L',}
+    name['Sec_C4'] = {'y' :'M', 'z' : 'N',}
+    name['Sec_C5'] = {'y' :'O', 'z' : 'P',}
+    name['Sec_C6'] = {'y' :'Q', 'z' : 'R',}
+    name['Sec_C7'] = {'y' :'S', 'z' : 'T',}
+    name['Sec_C8'] = {'y' :'U', 'z' : 'V',}
+    name['Sec_C9'] = {'y' :'W', 'z' : 'X',}
+    name['Sec_C95'] = {'y' :'Y', 'z' : 'Z',}
+    name['Sec_C99'] = {'y' :'AA', 'z' : 'AB',}
+    name['Sec_C10'] = {'y' :'AC', 'z' : 'AD',}
+    name['Sec_Cav1'] = {'y' :'AE', 'z' : 'AF',}
+    name['Sec_Cav2'] = {'y' :'AG', 'z' : 'AH',}
     return name
 
 def hull_section_rows():                         # row name and row number

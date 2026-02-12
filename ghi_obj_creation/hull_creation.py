@@ -17,6 +17,9 @@ def hull_doc_creation(section_data):
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Curves").Label="Hull_Curves"      
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_RearTransom").Label="Hull_RearTransom"
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_KeelLine").Label="Hull_KeelLine"
+    App.activeDocument().addObject("App::DocumentObjectGroup","Hull_CenterLine").Label="Hull_CenterLine"
+    App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Chine_and_Sheer").Label="Hull_Chine_and_Sheer"
+
     varset_creation_data = varset_creation(section_data)
     App.ActiveDocument=App.getDocument(name)
     Gui.ActiveDocument=Gui.getDocument(name)

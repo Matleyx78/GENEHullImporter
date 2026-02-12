@@ -11,6 +11,7 @@ from ghi_obj_creation.hull_creation import hull_center_line_sketch_creation
 from ghi_obj_creation.rear_transom import rear_transom_creation
 from ghi_obj_creation.keel_line import keel_line_creation
 from ghi_obj_creation.center_line import center_line_creation
+from ghi_obj_creation.hard_and_sheer import hard_and_sheer_creation
 from ghi_cell_alias_utils.cam_hull_section import hull_section_value
 from ghi_cell_alias_utils.cam_hull_section import hull_section_name
 from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value
@@ -49,7 +50,7 @@ class DocSketchHullCmd:
         # creo la keel line
         keel_line_creation(doc_name, body_name)
         # creo la deck line
-        # creo la punteggiatura della parte posteriore
+        hard_and_sheer_creation(doc_name, body_name)
         rear_transom_creation(doc_name, body_name, hc_type)
 
 

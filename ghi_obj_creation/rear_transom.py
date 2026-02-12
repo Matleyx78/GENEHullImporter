@@ -31,6 +31,7 @@ def rear_transom_creation(doc_name, body_name, hc_type):
 
     rthi_valid_values = varset_validate(rt_hull_inter_cell_mapping(), doc_name, body_name)
     rtdi_valid_values = varset_validate(rt_deck_inter_cell_mapping(), doc_name, body_name)
+    
     ordered_rthi_values = {}
     ordered_rtdi_values = {}
     ordered_rthi_values['RT_HI'] = mirror_ord2_coord1(rthi_valid_values['RT_HI'], 'y', 'x', 'y')

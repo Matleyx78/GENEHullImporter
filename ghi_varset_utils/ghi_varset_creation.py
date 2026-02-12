@@ -6,6 +6,7 @@ from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_cell_mapp
 from ghi_cell_alias_utils.cam_rear_t_deck_intersec import rt_deck_inter_cell_mapping
 from ghi_cell_alias_utils.cam_rear_t_hull_intersec import rt_hull_inter_cell_mapping
 from ghi_cell_alias_utils.cam_chine_and_sheer_line import chine_and_sheer_line_cell_mapping
+from ghi_cell_alias_utils.cam_keel_line import keel_line_cell_mapping
 from ghi_cell_alias_utils.cam_gh_other_val import other_values_cell_mapping
 
 #   ALL SECTION VALUE
@@ -14,6 +15,7 @@ from ghi_cell_alias_utils.cam_hull_center_line import hull_center_line_value
 from ghi_cell_alias_utils.cam_rear_t_deck_intersec import rt_deck_inter_value
 from ghi_cell_alias_utils.cam_rear_t_hull_intersec import rt_hull_inter_value
 from ghi_cell_alias_utils.cam_chine_and_sheer_line import chine_and_sheer_line_value
+from ghi_cell_alias_utils.cam_keel_line import keel_line_value
 from ghi_cell_alias_utils.cam_gh_other_val import other_values_value
 
 def varset_creation(sheet):
@@ -36,6 +38,9 @@ def varset_creation(sheet):
     all_section_data['ov'] = {}
     all_section_data['ov']['cel_map'] = other_values_cell_mapping()
     all_section_data['ov']['cel_val'] = other_values_value(sheet)
+    all_section_data['kl'] = {}
+    all_section_data['kl']['cel_map'] = keel_line_cell_mapping()
+    all_section_data['kl']['cel_val'] = keel_line_value(sheet)
     valid_sec = {}
     # per ogni sezione verifico che i dati siano numerici
     for gruppo in all_section_data:     # es. 'hs', 'hcl', 'rtde', 'rthi'

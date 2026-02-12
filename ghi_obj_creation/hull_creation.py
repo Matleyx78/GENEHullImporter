@@ -16,6 +16,7 @@ def hull_doc_creation(section_data):
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Sketch").Label="Hull_Sketch" 
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_Curves").Label="Hull_Curves"      
     App.activeDocument().addObject("App::DocumentObjectGroup","Hull_RearTransom").Label="Hull_RearTransom"
+    App.activeDocument().addObject("App::DocumentObjectGroup","Hull_KeelLine").Label="Hull_KeelLine"
     varset_creation_data = varset_creation(section_data)
     App.ActiveDocument=App.getDocument(name)
     Gui.ActiveDocument=Gui.getDocument(name)

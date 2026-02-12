@@ -1,0 +1,8 @@
+import GENEHullImporterWorkbench
+from importlib import reload
+reload(GENEHullImporterWorkbench)
+# If you have a GUI part
+#import YourWorkbenchGui
+#reload(YourWorkbenchGui)
+# Re-activate to refresh icons/commands
+FreeCADGui.activateWorkbench("GENEHullImporterWorkbench")

@@ -22,7 +22,7 @@ def _dedup_points(points, tol=1e-6):
             )
     return cleaned
 
-def rear_transom_creation(doc_name, body_name, hc_type):
+def hard_and_sheer_creation(doc_name, body_name, hc_type):
     # Raccolgo i dati dai varset
     doc = App.ActiveDocument
     sheer_points = {}

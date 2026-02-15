@@ -50,7 +50,7 @@ class DocSketchHullCmd:
         # creo la keel line
         keel_line_creation(doc_name, body_name)
         # creo la deck line
-        hard_and_sheer_creation(doc_name, body_name)
+        hard_and_sheer_creation(doc_name, body_name, hc_type)
         rear_transom_creation(doc_name, body_name, hc_type)
 
 
